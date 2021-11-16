@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    active: local
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://ec2-3-35-27-135.ap-northeast-2.compute.amazonaws.com:3306/MTBX
+    username: mtbx
+    password: Qwer1234!@#
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 2
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    database: mysql
+    properties:
+      hibernate:
+        format_sql: true
+  mybatis:
+    configuration:
+      cache-enabled: false
+      map-underscore-to-camel-case: true
+    mapper-locations: sql/**/*.xml
+    type-aliases-package: com.example.demo
+logging:
+  level:
+    root: info
+    mysql: error
+    jdbc:
+      sqlonly: info
+      sqltiming: error
+      audit: warn
+      resultset: error
+      resultsettable: error
+      connection: error
+  pattern:
+    console: "%d [%-5level] %-30logger{30}.%M : %msg%n"
+
