@@ -3,8 +3,8 @@
 <mapper namespace="com.example.demo.mybatis.mapper.TeamMapper">
 
 
-    <select id="selectNow" parameterType="String" resultType="String">
-       SELECT NOW() FROM DUAL
+    <select id="selectNow" parameterType="String" resultType="map">
+       SELECT * FROM TEAM WHERE SEQ = ${seq}
     </select>
 
 

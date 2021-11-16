@@ -7,7 +7,7 @@ import java.util.Map;
 @Mapper
 public interface TeamMapper {
 
-    String selectNow(String param);
+    Map<String,Object> selectNow(String param);
 
 
 
