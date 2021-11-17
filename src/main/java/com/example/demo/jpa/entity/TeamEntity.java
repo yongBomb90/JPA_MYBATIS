@@ -1,14 +1,15 @@
 package com.example.demo.jpa.entity;
 
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Data
 @Entity
+@EqualsAndHashCode(of="seq")
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "TEAM")
 public class TeamEntity {
 

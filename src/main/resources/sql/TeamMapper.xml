@@ -3,7 +3,7 @@
 <mapper namespace="com.example.demo.mybatis.mapper.TeamMapper">
 
 
-    <select id="selectNow" parameterType="String" resultType="map">
+    <select id="selectNow" parameterType="String" resultType="com.example.demo.mybatis.vo.TeamVO">
        SELECT * FROM TEAM WHERE SEQ = ${seq}
     </select>
 
