@@ -1,0 +1,2 @@
+# JPA_MYBATIS
+JPA 와 MYBATIS의 다른점 및 설정
