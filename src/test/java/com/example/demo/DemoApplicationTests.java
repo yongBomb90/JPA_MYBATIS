@@ -32,27 +32,22 @@ class DemoApplicationTests {
 
     @Test
     void contextLoads() {
-
+        
         TeamEntity teamEntity = new TeamEntity();
         teamEntity.setName("테스트2");
         MemberEntity memberEntity = MemberEntity.builder()
                 .name("사람").birthDay( LocalDateTime.now()).sex(MemberEntity.Sex.M)
                                     .build();
-
-
-
         teamRepo.save(teamEntity);
         memberEntity.setTeam(teamEntity);
         memberRepo.save(memberEntity);
-
         TeamVO res = teamMapper.selectNow("1");
         System.out.println(res.toString());
-
-
-
-
     }
 
+    /***
+    트랜잭션이 있어여 영속성 
+    ***/
     @Test
     @Transactional
     void contextLoads2() {
