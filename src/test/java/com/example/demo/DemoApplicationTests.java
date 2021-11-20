@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.jpa.entity.LeagueEntity;
 import com.example.demo.jpa.entity.MemberEntity;
 import com.example.demo.jpa.entity.TeamEntity;
 import com.example.demo.jpa.repository.LeagueRepo;
