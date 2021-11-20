@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import com.example.demo.jpa.entity.LeagueEntity;
 import com.example.demo.jpa.entity.MemberEntity;
 import com.example.demo.jpa.entity.TeamEntity;
 import com.example.demo.jpa.repository.LeagueRepo;
@@ -44,6 +43,9 @@ class DemoApplicationTests {
         System.out.println(teamVO);
     }
 
+    /***
+    트랜잭션이 있어여 영속성
+    ***/
     @Test
     @Transactional
     @Rollback(value = false)
