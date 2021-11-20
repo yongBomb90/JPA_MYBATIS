@@ -19,4 +19,6 @@ public class TeamVO {
 
     private List<MemberVO> members;
 
+    private LeaugueVO league;
+
 }

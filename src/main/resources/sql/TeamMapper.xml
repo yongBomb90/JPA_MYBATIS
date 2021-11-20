@@ -4,10 +4,46 @@
 
 
     <select id="selectNow" parameterType="String" resultType="com.example.demo.mybatis.vo.TeamVO">
-       SELECT * FROM TEAM WHERE SEQ = ${seq}
+       SELECT *
+       FROM   TEAM
+       WHERE  SEQ = ${seq}
     </select>
 
 
+    <resultMap id="TeamRsMap" type="com.example.demo.mybatis.vo.TeamVO">
+        <id property="seq" column="SEQ" javaType="long"></id>
+        <result property="name" column="NAME" javaType="String"></result>
+
+        <collection property="members" ofType="com.example.demo.mybatis.vo.MemberVO">
+            <id property="seq" column="MEM_SEQ" javaType="long"></id>
+            <result property="name" column="MEM_NAME" javaType="String"></result>
+            <result property="sex" column="SEX" javaType="String"></result>
+        </collection>
+
+        <collection property="league" ofType="com.example.demo.mybatis.vo.LeaugueVO">
+            <id property="seq" column="LEAGUE_SEQ" javaType="long"></id>
+            <result property="name" column="LEAGUE_NAME" javaType="String"></result>
+        </collection>
+
+    </resultMap>
+
+
+
+    <select id="selectTeam" parameterType="com.example.demo.mybatis.vo.TeamVO"  resultMap="TeamRsMap">
+        SELECT T.SEQ
+             , T.NAME
+             , M.SEQ AS MEM_SEQ
+             , M.NAME AS MEM_NAME
+             , M.SEX AS SEX
+             , L.SEQ AS LEAGUE_SEQ
+             , L.NAME AS LEAGUE_NAME
+        FROM   TEAM T
+        LEFT JOIN LEAGUE L
+        ON     L.SEQ = T.LEAGUE_SEQ
+        LEFT JOIN MEMBER M
+        ON     T.SEQ = M.TEAM_SEQ
+        WHERE  T.SEQ = #{seq}
+    </select>
 
 
 

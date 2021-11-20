@@ -1,7 +1,9 @@
 package com.example.demo;
 
+import com.example.demo.jpa.entity.LeagueEntity;
 import com.example.demo.jpa.entity.MemberEntity;
 import com.example.demo.jpa.entity.TeamEntity;
+import com.example.demo.jpa.repository.LeagueRepo;
 import com.example.demo.jpa.repository.MemberRepo;
 import com.example.demo.jpa.repository.TeamRepo;
 import com.example.demo.mybatis.mapper.TeamMapper;
@@ -9,6 +11,7 @@ import com.example.demo.mybatis.vo.TeamVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -30,34 +33,29 @@ class DemoApplicationTests {
     @Autowired
     MemberRepo memberRepo;
 
+    @Autowired
+    LeagueRepo leagueRepo;
+
     @Test
     void contextLoads() {
-
-        TeamEntity teamEntity = new TeamEntity();
-        teamEntity.setName("테스트2");
-        MemberEntity memberEntity = MemberEntity.builder()
-                .name("사람").birthDay( LocalDateTime.now()).sex(MemberEntity.Sex.M)
-                                    .build();
-
-
-
-        teamRepo.save(teamEntity);
-        memberEntity.setTeam(teamEntity);
-        memberRepo.save(memberEntity);
-
-        TeamVO res = teamMapper.selectNow("1");
-        System.out.println(res.toString());
-
-
-
-
+        TeamVO param = new TeamVO();
+        param.setSeq(2L);
+        TeamVO teamVO = teamMapper.selectTeam(param);
+        System.out.println(teamVO);
     }
 
     @Test
     @Transactional
+    @Rollback(value = false)
     void contextLoads2() {
-        MemberEntity memberEntity = memberRepo.getById(2L);
-        System.out.println("what?"+memberEntity.getName());
+        TeamEntity teamEntity = teamRepo.getById(2L);
+        LeagueEntity league = LeagueEntity.builder().name("리그앙").
+                                build();
+
+        league = leagueRepo.save(league);
+        teamEntity.setLeague(league);
+
+
 
     }
 

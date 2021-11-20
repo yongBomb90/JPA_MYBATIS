@@ -8,7 +8,7 @@ import java.util.Map;
 @Mapper
 public interface TeamMapper {
 
-    TeamVO selectNow(String param);
+    TeamVO selectTeam(TeamVO param);
 
 
 
