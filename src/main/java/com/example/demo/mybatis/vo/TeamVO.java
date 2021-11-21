@@ -1,16 +1,14 @@
 package com.example.demo.mybatis.vo;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.List;
 
 @Data
 @ToString
+@Builder
 public class TeamVO {
 
     private Long seq;
@@ -19,6 +17,10 @@ public class TeamVO {
 
     private List<MemberVO> members;
 
-    private LeaugueVO league;
-
 }
+
+
+    //
+//    private LeaugueVO league;
+
+

@@ -38,10 +38,10 @@ class DemoApplicationTests {
 
     @Test
     void contextLoads() {
-        TeamVO param = new TeamVO();
-        param.setSeq(2L);
-        TeamVO teamVO = teamMapper.selectTeam(param);
-        System.out.println(teamVO);
+//        TeamVO param = new TeamVO();
+//        param.setSeq(2L);
+//        TeamVO teamVO = teamMapper.selectTeam(param);
+//        System.out.println(teamVO);
     }
 
     /***
