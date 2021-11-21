@@ -26,6 +26,7 @@ mybatis:
     map-underscore-to-camel-case: true
   mapper-locations: sql/**/*.xml
   type-aliases-package: com.example.demo
+  type-handlers-package: com.example.demo.mybatis.typeHandler
 logging:
   level:
     root: info

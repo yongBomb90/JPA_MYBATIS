@@ -15,7 +15,7 @@ public class MemberVO {
 
     private String name;
 
-    private LocalDateTime birthDay;
+    private String birthDay;
 
     private String sex;
 
