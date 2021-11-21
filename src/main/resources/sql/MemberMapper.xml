@@ -3,6 +3,50 @@
 <mapper namespace="com.example.demo.mybatis.mapper.MemberMapper">
 
 
+    <resultMap id="MemberRsMap" type="com.example.demo.mybatis.vo.MemberVO">
+        <id property="seq" column="SEQ" javaType="long"></id>
+        <result property="name" column="NAME" javaType="String"></result>
+        <result property="sex" column="SEX" javaType="String"></result>
+        <association property="team" javaType="com.example.demo.mybatis.vo.TeamVO">
+            <id property="seq" column="TEAM_SEQ" javaType="long"></id>
+            <result property="name" column="TEAM_NAME" javaType="String"></result>
+        </association>
+    </resultMap>
 
+    <select id="selectMember"  parameterType="com.example.demo.mybatis.vo.MemberVO" resultMap="MemberRsMap">
+        SELECT      M.SEQ AS SEQ
+                  , M.NAME AS NAME
+                  , M.SEX AS SEX
+                  , T.SEQ AS TEAM_SEQ
+                  , T.NAME AS TEAM_NAME
+        FROM       MEMBER M
+        LEFT JOIN  TEAM T
+        ON         T.SEQ = M.TEAM_SEQ
+        WHERE      M.SEQ = #{seq}
+    </select>
 
+    <resultMap id="MemberRsMap2" type="com.example.demo.mybatis.vo.MemberVO">
+        <id property="seq" column="SEQ" javaType="long"></id>
+        <result property="name" column="NAME" javaType="String"></result>
+        <result property="sex" column="SEX" javaType="String"></result>
+        <association property="team" javaType="com.example.demo.mybatis.vo.TeamVO" select="selectMTeam" column="TEAM_SEQ" >
+            <id property="seq" column="TEAM_SEQ" javaType="long"></id>
+            <result property="name" column="TEAM_NAME" javaType="String"></result>
+        </association>
+    </resultMap>
+
+    <select id="selectMember2" parameterType="com.example.demo.mybatis.vo.MemberVO"  resultMap="MemberRsMap2">
+        SELECT  M.SEQ AS SEQ
+              , M.NAME AS NAME
+              , M.SEX AS SEX
+              , M.TEAM_SEQ AS TEAM_SEQ
+        FROM    MEMBER M
+        WHERE   M.SEQ = #{seq}
+    </select>
+    <select id="selectMTeam" parameterType="com.example.demo.mybatis.vo.MemberVO"  resultType="com.example.demo.mybatis.vo.TeamVO">
+        SELECT  T.SEQ AS TEAM_SEQ
+             ,  T.NAME AS TEAM_NAME
+        FROM    TEAM T
+        WHERE   T.SEQ = #{TEAM_SEQ}
+    </select>
 </mapper>

@@ -6,7 +6,9 @@ import com.example.demo.jpa.repository.LeagueRepo;
 import com.example.demo.jpa.repository.MemberRepo;
 import com.example.demo.jpa.repository.TeamRepo;
 import com.example.demo.mybatis.DAO.TeamDAO;
+import com.example.demo.mybatis.mapper.MemberMapper;
 import com.example.demo.mybatis.mapper.TeamMapper;
+import com.example.demo.mybatis.vo.MemberVO;
 import com.example.demo.mybatis.vo.TeamVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,21 @@ class MybatisTests {
     void Collection_Test() throws Exception {
         TeamVO team = teamMapper.selectTeam(TeamVO.builder().seq(2L).build());
         System.out.println(team);
+    }
+
+    @Autowired
+    MemberMapper memberMapper;
+
+    @Test
+    void Asso_Test() throws Exception {
+        MemberVO member = memberMapper.selectMember(MemberVO.builder().seq(2L).build());
+        System.out.println(member);
+    }
+
+    @Test
+    void Asso_Test2() throws Exception {
+        MemberVO member = memberMapper.selectMember2(MemberVO.builder().seq(2L).build());
+        System.out.println(member);
     }
 
 }

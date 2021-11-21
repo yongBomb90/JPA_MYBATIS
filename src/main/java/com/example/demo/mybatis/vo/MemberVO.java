@@ -1,23 +1,25 @@
 package com.example.demo.mybatis.vo;
 
 import com.example.demo.jpa.entity.MemberEntity;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
+@Builder
 public class MemberVO {
 
     private Long seq;
 
     private String name;
 
-    private String birthDay;
-
     private String sex;
+
+    private TeamVO team;
 
 
 }

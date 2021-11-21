@@ -1,21 +1,22 @@
 package com.example.demo.mybatis.vo;
 
 import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString
 @Builder
 public class TeamVO {
 
     private Long seq;
 
-    private String name; // 로그인 아이디
+    private String name;
 
-    private List<MemberVO> members;
+    private List<MemberVO> members; // 1:다 관계
 
 }
 

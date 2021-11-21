@@ -27,6 +27,16 @@ class DemoApplicationTests {
     @Resource
     TeamMapper teamMapper;
 
+    @Test
+    void contextLoads() {
+//        TeamVO param = new TeamVO();
+//        param.setSeq(2L);
+//        TeamVO teamVO = teamMapper.selectTeam(param);
+//        System.out.println(teamVO);
+    }
+
+
+
     @Autowired
     TeamRepo teamRepo;
 
@@ -36,13 +46,6 @@ class DemoApplicationTests {
     @Autowired
     LeagueRepo leagueRepo;
 
-    @Test
-    void contextLoads() {
-//        TeamVO param = new TeamVO();
-//        param.setSeq(2L);
-//        TeamVO teamVO = teamMapper.selectTeam(param);
-//        System.out.println(teamVO);
-    }
 
     /***
     트랜잭션이 있어여 영속성
@@ -61,5 +64,6 @@ class DemoApplicationTests {
 
 
     }
+
 
 }

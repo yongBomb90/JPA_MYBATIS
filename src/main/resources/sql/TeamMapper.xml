@@ -28,29 +28,25 @@
              , M.NAME AS MEM_NAME
              , M.SEX AS SEX
         FROM   TEAM T
-                   LEFT JOIN MEMBER M
-                             ON     T.SEQ = M.TEAM_SEQ
+        LEFT JOIN MEMBER M
+        ON     T.SEQ = M.TEAM_SEQ
         WHERE  T.SEQ = #{seq}
+        ORDER BY T.SEQ,M.SEQ
     </select>
+
+
 
 
 <!--
     <resultMap id="TeamRsMap" type="com.example.demo.mybatis.vo.TeamVO">
         <id property="seq" column="SEQ" javaType="long"></id>
         <result property="name" column="NAME" javaType="String"></result>
-
         <collection property="members" ofType="com.example.demo.mybatis.vo.MemberVO">
             <id property="seq" column="MEM_SEQ" javaType="long"></id>
             <result property="birthDay" column="BIRTH_DAY" javaType="String" typeHandler="com.example.demo.mybatis.typeHandler.BirthDayHandler"></result>
             <result property="name" column="MEM_NAME" javaType="String"></result>
             <result property="sex" column="SEX" javaType="String"></result>
         </collection>
-
-        <collection property="league" ofType="com.example.demo.mybatis.vo.LeaugueVO">
-            <id property="seq" column="LEAGUE_SEQ" javaType="long"></id>
-            <result property="name" column="LEAGUE_NAME" javaType="String"></result>
-        </collection>
-
     </resultMap>
 
 
@@ -61,16 +57,11 @@
              , M.SEQ AS MEM_SEQ
              , M.NAME AS MEM_NAME
              , M.SEX AS SEX
-             , M.BIRTH_DAY
-             , L.SEQ AS LEAGUE_SEQ
-             , L.NAME AS LEAGUE_NAME
         FROM   TEAM T
-        LEFT JOIN LEAGUE L
-        ON     L.SEQ = T.LEAGUE_SEQ
         LEFT JOIN MEMBER M
         ON     T.SEQ = M.TEAM_SEQ
         WHERE  T.SEQ = #{seq}
-        ORDER BY T.SEQ , M.SEQ , L.SEQ ,
+        ORDER BY T.SEQ , M.SEQ
     </select>
 
 -->

@@ -30,7 +30,7 @@ public class MemberEntity {
     private Sex sex;
 
     @ManyToOne(targetEntity = TeamEntity.class)
-    @JoinColumn(name = "TEAN_SEQ")
+    @JoinColumn(name = "TEAM_SEQ")
     private TeamEntity team;
 
     public enum Sex {

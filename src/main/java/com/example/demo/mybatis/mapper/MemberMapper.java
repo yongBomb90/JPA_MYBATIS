@@ -10,6 +10,8 @@ public interface MemberMapper {
 
     MemberVO selectMember(MemberVO param);
 
+    MemberVO selectMember2(MemberVO param);
+
 
 
 }
