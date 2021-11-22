@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(readOnly = true)
 public interface  TeamRepo extends JpaRepository<TeamEntity, Long> {
-
-
 }
+
+
+
+

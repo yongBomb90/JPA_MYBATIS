@@ -62,4 +62,9 @@ class MybatisTests {
         System.out.println(member);
     }
 
+    @Test
+    void type_Test() throws Exception {
+        MemberVO member = memberMapper.selectMember3(MemberVO.builder().seq(2L).build());
+        System.out.println(member);
+    }
 }

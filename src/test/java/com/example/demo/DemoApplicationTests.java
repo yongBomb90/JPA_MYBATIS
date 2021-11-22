@@ -59,7 +59,6 @@ class DemoApplicationTests {
                                 build();
 
         league = leagueRepo.save(league);
-        teamEntity.setLeague(league);
 
 
 
