@@ -14,6 +14,10 @@ import javax.persistence.*;
 @Table(name = "TEAM")
 public class TeamEntity {
 
+    @ManyToOne(targetEntity = LeagueEntity.class)
+    @JoinColumn(name = "LEAGUE_SEQ")
+    private LeagueEntity league;
+
     @Id
     @Column(name = "SEQ")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +25,6 @@ public class TeamEntity {
 
     @Column(name = "NAME" , unique = true , nullable = false)
     private String name; // 로그인 아이디
-
-//    @ManyToOne(targetEntity = LeagueEntity.class)
-//    @JoinColumn(name = "LEAGUE_SEQ")
-//    private LeagueEntity league;
 
 
 }

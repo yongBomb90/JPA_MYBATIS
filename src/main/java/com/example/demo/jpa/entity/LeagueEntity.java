@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -12,7 +13,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "LEAGUE")
+@NamedEntityGraph(name = "LeagueEntity.teams", attributeNodes = { @NamedAttributeNode("teams")})
 public class LeagueEntity {
+    @OneToMany(mappedBy="league" , fetch = FetchType.LAZY )
+    private List<TeamEntity> teams;
 
     @Id
     @Column(name = "SEQ")
@@ -21,8 +25,6 @@ public class LeagueEntity {
 
     @Column(name = "NAME" , unique = true , nullable = false)
     private String name;
-
-
 
 
 }

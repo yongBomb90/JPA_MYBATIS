@@ -1,6 +1,12 @@
 package com.example.demo;
 
+import com.example.demo.jpa.entity.Car;
+import com.example.demo.jpa.entity.LeagueEntity;
 import com.example.demo.jpa.entity.TeamEntity;
+import com.example.demo.jpa.projection.LeugueProjection;
+import com.example.demo.jpa.repository.CarRepo;
+import com.example.demo.jpa.repository.ItemRepo;
+import com.example.demo.jpa.repository.LeagueRepo;
 import com.example.demo.jpa.repository.TeamRepo;
 import com.example.demo.mybatis.DAO.TeamDAO;
 import com.example.demo.mybatis.mapper.MemberMapper;
@@ -13,12 +19,19 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
+
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @SpringBootTest
 class JPATests {
 
 
-    @Autowired
-    TeamRepo teamRepo;
+
+
     @Transactional
     @Test
     void JPA_Test() throws Exception {
@@ -27,7 +40,11 @@ class JPATests {
         System.out.println(teamEntity);
     }
 
+    @Autowired
+    TeamRepo teamRepo;
 
+    @PersistenceContext
+    EntityManager em;
 
     @Transactional
     @Rollback(value = false)
@@ -43,27 +60,65 @@ class JPATests {
         // 해당 상태일 경우 마지막 영속성 컨텍스트가 사라지기 지전 상태의 엔티티를 데이터 베이스에 저장한다.
         영속상태.setName("영속상태");
         teamRepo.flush();
-        //teamRepo.
 
-        // teamRepo.flush() 통해 영속성 컨텍스트가 비워지면서 해당 엔티티는 더이상 컨텍스트에 존재하지 않게 된다.
-//        TeamEntity 준영속상태 = 영속상태;
-//        준영속상태.setName("준영속상태");
 
+        // em.clear(); 통해 영속성 컨텍스트가 비워지면서 해당 엔티티는 더이상 컨텍스트에 존재하지 않게 된다.
+        em.clear();
+        TeamEntity 준영속상태 = 영속상태;
+        준영속상태.setName("준영속상태");
+
+        // 마지막 삭제가 이루어지고 해당 객체는 더이상 컨텍스트에 존재하지않으며
+        // 다시 영속상태로 가기위해서는 새로 영속성 컨텍스트에 진입(save) 하면서 새로운 Entity가 되어야한다.
+        teamRepo.delete(준영속상태);
+        TeamEntity 삭제상태 = 준영속상태;
+        System.out.println(삭제상태);
 
     }
+
+    @Autowired
+    LeagueRepo leagueRepo;
 
     @Transactional
     @Rollback(value = false)
     @Test
     void JPA_Test3() throws Exception {
-        // 마지막 삭제가 이루어지고 해당 객체는 더이상 컨텍스트에 존재하지않으며
-        // 다시 영속상태로 가기위해서는 새로 영속성 컨텍스트에 진입(save) 하면서 새로운 Entity가 되어야한다.
-        TeamEntity 삭제상태 = TeamEntity.builder().name("BombTeam").build();;
-        teamRepo.delete(삭제상태);
-        삭제상태 =  teamRepo.getById(삭제상태.getSeq()) ;
-        System.out.println(삭제상태 == null ? "삭제상태는 없어짐" : "");
+        // 초기 리그의 정보를 가져오기위해 쿼리 실행
+        List<LeagueEntity> list = leagueRepo.findAll();
+        String str = "";
+        for ( LeagueEntity league : list ) {
+            // 해당 로직에서는 팀의 정보를 조회하지 않는다.
+            str += league.getName();
+        }
 
+        for ( LeagueEntity league : list ) {
+            // 해당 로직에서는 팀의 정보를 조회하므로 리그별 팀의 정보를 쿼리로 조회한다
+            str += league.getTeams().get(0).getName();
+        }
     }
 
+    @Transactional
+    @Rollback(value = false)
+    @Test
+    void JPA_Test4() throws Exception {
+        LeugueProjection leugueProjection =  leagueRepo.getLeagueEntityByName("K-league");
+        System.out.println(leugueProjection.getNickName());
+    }
+
+
+    @Autowired
+    ItemRepo itemRepo;
+    @Autowired
+    CarRepo carRepo;
+
+    @Transactional
+    @Rollback(value = false)
+    @Test
+    void JPA_Test5() throws Exception {
+        Car 자식 = new Car();
+        자식.setName("K3"); 자식.setBrand("KIA");
+        carRepo.save(자식);
+        Car 저장된자식 = carRepo.getById(1L);
+        assertEquals(저장된자식.getBrand(),"KIA");
+    }
 
 }
