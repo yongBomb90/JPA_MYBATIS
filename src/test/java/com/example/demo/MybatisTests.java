@@ -18,6 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
+/**
+ *  Mybatis 테스트 구현
+ */
 @SpringBootTest
 class MybatisTests {
 

@@ -26,10 +26,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * JPA 테스트 구현
+ */
 @SpringBootTest
 class JPATests {
-
-
 
 
     @Transactional
