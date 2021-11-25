@@ -83,13 +83,18 @@ class JPATests {
     @Rollback(value = false)
     @Test
     void JPA_Test3() throws Exception {
+
         // 초기 리그의 정보를 가져오기위해 쿼리 실행
         List<LeagueEntity> list = leagueRepo.findAll();
         String str = "";
+
+
         for ( LeagueEntity league : list ) {
             // 해당 로직에서는 팀의 정보를 조회하지 않는다.
             str += league.getName();
         }
+
+
 
         for ( LeagueEntity league : list ) {
             // 해당 로직에서는 팀의 정보를 조회하므로 리그별 팀의 정보를 쿼리로 조회한다

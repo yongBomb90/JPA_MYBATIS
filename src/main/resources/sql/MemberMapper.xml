@@ -56,7 +56,8 @@
         <id property="seq" column="SEQ" javaType="long"></id>
         <result property="name" column="NAME" javaType="String"></result>
         <result property="sex" column="SEX" javaType="String"></result>
-        <result property="birthDay" column="BIRTH_DAY" javaType="String" typeHandler="BirthDayHandler"></result>
+        <result property="birthDay" column="BIRTH_DAY" javaType="String"
+                typeHandler="BirthDayHandler"></result>
     </resultMap>
     <select id="selectMember3"  parameterType="com.example.demo.mybatis.vo.MemberVO" resultMap="MemberRsMap3">
         SELECT M.SEQ AS SEQ

@@ -10,7 +10,8 @@ import java.text.SimpleDateFormat;
 @MappedJdbcTypes(JdbcType.DATE)
 public class BirthDayHandler extends BaseTypeHandler<String> {
     @Override
-    public void setNonNullParameter(PreparedStatement ps, int i, String parameter, JdbcType jdbcType) throws SQLException {
+    public void setNonNullParameter(PreparedStatement ps,
+                                    int i, String parameter, JdbcType jdbcType) throws SQLException {
         // set 할때 콜
     }
     @Override
