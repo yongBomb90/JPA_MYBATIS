@@ -16,6 +16,8 @@ import com.example.demo.mybatis.vo.TeamVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -127,4 +129,14 @@ class JPATests {
         assertEquals(저장된자식.getBrand(),"KIA");
     }
 
+
+
+    @Transactional
+    @Rollback(value = false)
+    @Test
+    void JPA_Test6() throws Exception {
+        Pageable pageable = Pageable.ofSize(10);
+        Page<LeagueEntity> list  = leagueRepo.findAllWithTeam(pageable);
+        assertEquals(list.getContent().size() > -1,true);
+    }
 }
